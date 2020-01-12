@@ -1,11 +1,15 @@
 import { config } from "dotenv";
-import EbayService from "./eBay";
+
 config({
   path: ".env"
 });
 
-const ebay = new EbayService();
+import AppServer from "./server";
 
-ebay
-  .findItemByKeywords({ keywords: "Harry potter" })
-  .then(data => console.log(data));
+const PORT = process.env.PORT || 3000;
+const server = AppServer;
+try {
+  server.listen(PORT, () => console.log(`Server running at port: ${PORT}`));
+} catch (error) {
+  console.log("Couldn't start the server, error:", error);
+}
