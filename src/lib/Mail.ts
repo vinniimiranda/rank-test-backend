@@ -9,12 +9,9 @@ import mailConfig from "../config/mail";
 class Mail {
   private transporter: any;
   constructor() {
-    const { host, port, secure, auth } = mailConfig;
+    // @ts-ignore;
     this.transporter = nodemailer.createTransport({
-      host,
-      port,
-      secure,
-      auth
+      ...mailConfig
     });
     this.configureTemplates();
   }
