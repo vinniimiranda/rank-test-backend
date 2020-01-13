@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
+  "scripts": {
+    "build": "yarn tsc",
+    "postbuild": "Xcopy /E /I src\\views .\\dist\\views"
+  },
   "dependencies": {
     "dotenv": "^8.2.0",
     "ebay-node-api": "^2.7.6",
