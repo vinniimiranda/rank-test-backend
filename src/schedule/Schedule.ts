@@ -18,7 +18,7 @@ class Schedule {
       interval: 30
     });
 
-    setTimeout(async () => {
+    setInterval(async () => {
       for (const alert of twoMinutesAlerts) {
         const keyword = await alert.get("keyword");
         const result = await EbayService.findItemByKeywords({
@@ -33,9 +33,9 @@ class Schedule {
             keyword,
             result
           }
-        });
+        }).catch((err: any) => console.log(err));
       }
-    }, 60000 * 2);
+    }, 1000);
   }
 }
 
