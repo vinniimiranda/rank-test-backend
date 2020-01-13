@@ -40,8 +40,10 @@ class EbayService {
 
       const results = data[0].searchResult[0].item;
       return results;
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+    }
   }
 }
 
-export default EbayService;
+export default new EbayService();
