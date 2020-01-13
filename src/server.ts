@@ -1,4 +1,5 @@
 import express from "express";
+import mongoose from "mongoose";
 
 import routes from "./routes";
 
@@ -9,6 +10,7 @@ class AppServer {
     this.server = express();
     this.middlewares();
     this.routes();
+    this.database();
   }
 
   private routes() {
@@ -17,6 +19,13 @@ class AppServer {
 
   private middlewares() {
     this.server.use(express.json());
+  }
+
+  private database(): void {
+    mongoose.connect("mongodb://localhost:27017/ebay", {
+      useNewUrlParser: true,
+      useUnifiedTopology: true
+    });
   }
 }
 export default new AppServer().server;

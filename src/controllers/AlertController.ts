@@ -1,4 +1,5 @@
 import { Request, Response, Router } from "express";
+import AlertModel from "./../models/AlertModel";
 
 class AlertController {
   private router = Router();
@@ -26,10 +27,20 @@ class AlertController {
       });
     }
 
-    return res.status(201).json({
+    const alertExists = await AlertModel.findOne({ keyword });
+
+    if (alertExists) {
+      return res.status(400).json({
+        message: "Alert already created for this keyword"
+      });
+    }
+
+    const alert = await AlertModel.create({
       keyword,
       interval
     });
+
+    return res.status(201).json(alert);
   }
 }
 
