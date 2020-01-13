@@ -1,5 +1,7 @@
 import { Router, Request, Response } from "express";
 
+import AlertController from "../controllers/AlertController";
+
 class Routing {
   router: Router;
   constructor() {
@@ -9,6 +11,8 @@ class Routing {
         root: "Api root routes !!!"
       })
     );
+
+    this.router.use("/alerts", AlertController.routes());
   }
 }
 
