@@ -47,7 +47,7 @@ class EbayService {
       );
       return results;
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   }
 }
