@@ -14,21 +14,30 @@ class AlertController {
   }
 
   private async store(req: Request, res: Response): Promise<any> {
-    const { keyword, interval } = req.body;
-
+    const { keyword, email, interval } = req.body;
+    const intervalAccepted = [2, 10, 30];
     if (!keyword) {
       return res.status(400).json({
-        message: "keyword is required"
+        message: "Keyword is required"
+      });
+    }
+    if (!email) {
+      return res.status(400).json({
+        message: "Email is required"
       });
     }
     if (!interval) {
       return res.status(400).json({
-        message: "interval is required"
+        message: "Interval is required"
+      });
+    }
+    if (!intervalAccepted.includes(interval)) {
+      return res.status(400).json({
+        message: "Invalid interval, value must be one of (2,10,30)"
       });
     }
 
-    const alertExists = await AlertModel.findOne({ keyword });
-
+    const alertExists = await AlertModel.findOne({ keyword, email });
     if (alertExists) {
       return res.status(400).json({
         message: "Alert already created for this keyword"
@@ -37,6 +46,7 @@ class AlertController {
 
     const alert = await AlertModel.create({
       keyword,
+      email,
       interval
     });
 
