@@ -21,10 +21,9 @@ class EbayService {
 
   private async getAccessToken() {
     try {
-      const { access_token } = await this.instance.getAccessToken();
-      // console.log(access_token);
+      await this.instance.getAccessToken();
     } catch (error) {
-      // console.log("Error");
+      console.log("Couldn't get Access Token");
     }
   }
 
@@ -32,13 +31,20 @@ class EbayService {
     try {
       const data = await this.instance.findItemsByKeywords({
         keywords,
-        sortOrder: "PricePlusShippingLowest", //https://developer.ebay.com/devzone/finding/callref/extra/fndcmpltditms.rqst.srtordr.html
+        sortOrder: "PricePlusShippingLowest",
         pageNumber: 1,
         limit: 3,
         entriesPerPage: 3
       });
 
-      const results = data[0].searchResult[0].item;
+      const results = data[0].searchResult[0].item.map(
+        (item: {
+          sellingStatus: { currentPrice: { [x: string]: any }[] }[];
+        }) => ({
+          ...item,
+          price: item.sellingStatus[0].currentPrice[0]["__value__"]
+        })
+      );
       return results;
     } catch (error) {
       console.log(error);

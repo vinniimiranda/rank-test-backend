@@ -18,20 +18,24 @@ class Schedule {
       interval: 30
     });
 
-    setInterval(async () => {
+    setTimeout(async () => {
       for (const alert of twoMinutesAlerts) {
         const keyword = await alert.get("keyword");
-        const search = await EbayService.findItemByKeywords({
+        const result = await EbayService.findItemByKeywords({
           keywords: keyword
         });
 
         await Mail.sendMail({
           subject: "New alert for you",
           to: `${alert.get("email")}`,
-          text: JSON.stringify(search)
+          template: "alert",
+          context: {
+            keyword,
+            result
+          }
         });
       }
-    }, 10000);
+    }, 60000 * 2);
   }
 }
 
