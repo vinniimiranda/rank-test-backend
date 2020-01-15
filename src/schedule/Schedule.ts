@@ -8,10 +8,21 @@ class Schedule {
   }
 
   private async createAlertsJob() {
+    const bullOptions = {
+      delay: 300,
+      removeOnComplete: true,
+      attempts: 3,
+      backoff: {
+        type: "exponential",
+        delay: 1000
+      }
+    };
+
     setInterval(async () => {
       const alerts = await AlertModel.find({
         interval: 2
       });
+
       for (const alert of alerts) {
         const email = await alert.get("email");
         const keyword = await alert.get("keyword");
@@ -19,7 +30,7 @@ class Schedule {
           keywords: keyword
         });
 
-        await mailQueue.add({ email, keyword, result });
+        await mailQueue.add({ email, keyword, result }, { ...bullOptions });
       }
     }, 60000 * 2);
 
@@ -34,7 +45,7 @@ class Schedule {
           keywords: keyword
         });
 
-        await mailQueue.add({ email, keyword, result });
+        await mailQueue.add({ email, keyword, result }, { ...bullOptions });
       }
     }, 60000 * 10);
 
@@ -49,7 +60,7 @@ class Schedule {
           keywords: keyword
         });
 
-        await mailQueue.add({ email, keyword, result });
+        await mailQueue.add({ email, keyword, result }, { ...bullOptions });
       }
     }, 60000 * 30);
   }
