@@ -17,6 +17,6 @@ export default {
         keyword,
         result
       }
-    }).catch((err: any) => console.log("Erro on send e-mail"));
+    });
   }
 };
