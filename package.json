@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "bull": "^3.12.1",
+    "bull-board": "^0.6.0",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "ebay-node-api": "^2.7.6",
@@ -26,6 +27,7 @@
   },
   "devDependencies": {
     "@types/bull": "^3.10.6",
+    "@types/bull-board": "^0.6.0",
     "@types/cors": "^2.8.6",
     "@types/express": "^4.17.2",
     "@types/express-handlebars": "^3.1.0",

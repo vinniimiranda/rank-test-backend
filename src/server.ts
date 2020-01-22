@@ -1,9 +1,11 @@
 import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
+import BullBoard from "bull-board";
 
 import routes from "./routes";
 import "./schedule/Schedule";
+import { mailQueue } from "./lib/Queue";
 
 class AppServer {
   server: express.Application;
@@ -13,6 +15,7 @@ class AppServer {
     this.middlewares();
     this.routes();
     this.database();
+    this.bullBoard();
   }
 
   private routes() {
@@ -22,6 +25,11 @@ class AppServer {
   private middlewares() {
     this.server.use(cors());
     this.server.use(express.json());
+  }
+
+  private bullBoard() {
+    BullBoard.setQueues(mailQueue);
+    this.server.use("/admin/queues", BullBoard.UI);
   }
 
   private database(): void {
