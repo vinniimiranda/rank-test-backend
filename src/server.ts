@@ -29,6 +29,7 @@ class AppServer {
       useNewUrlParser: true,
       useUnifiedTopology: true
     });
+    mongoose.set("useFindAndModify", false);
   }
 }
 export default new AppServer().server;
