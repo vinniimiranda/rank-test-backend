@@ -1,5 +1,6 @@
 // @ts-ignore
 import Ebay from "ebay-node-api";
+import "dotenv/config";
 
 class EbayService {
   public instance: any;

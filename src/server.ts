@@ -25,11 +25,12 @@ class AppServer {
   }
 
   private database(): void {
-    mongoose.connect("mongodb://localhost:27017/ebay", {
+    const uri = `mongodb://${process.env.MONGO_HOST}:${process.env.MONGO_PORT}/${process.env.MONGO_DATABASE}`;
+    mongoose.connect(uri, {
       useNewUrlParser: true,
-      useUnifiedTopology: true
+      useUnifiedTopology: true,
+      useFindAndModify: false
     });
-    mongoose.set("useFindAndModify", false);
   }
 }
 export default new AppServer().server;

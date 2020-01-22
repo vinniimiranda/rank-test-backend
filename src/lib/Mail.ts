@@ -16,7 +16,7 @@ class Mail {
     this.configureTemplates();
   }
 
-  private configureTemplates() {
+  private configureTemplates(): void {
     const viewPath = resolve(__dirname, "..", "views", "emails");
     this.transporter.use(
       "compile",

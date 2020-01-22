@@ -5,7 +5,8 @@
   "license": "MIT",
   "scripts": {
     "build": "yarn tsc",
-    "postbuild": "Xcopy /E /I src\\views .\\dist\\views"
+    "postbuild": "Xcopy /E /I src\\views .\\dist\\views",
+    "test": "yarn jest"
   },
   "dependencies": {
     "bull": "^3.12.1",

@@ -62,13 +62,14 @@ class AlertController {
   }
   private async update(req: Request, res: Response): Promise<any> {
     const { id } = req.params;
-    const result = await AlertModel.findByIdAndUpdate(id, { ...req.body });
-    return res.status(200).json(result);
+    await AlertModel.findOneAndUpdate(id, { ...req.body });
+
+    return res.status(204).json();
   }
   private async delete(req: Request, res: Response): Promise<any> {
     const { id } = req.params;
-    const result = await AlertModel.findByIdAndDelete(id);
-    return res.status(200).json(result);
+    await AlertModel.findByIdAndDelete(id);
+    return res.status(204).json();
   }
 }
 
