@@ -10,6 +10,9 @@ class AlertController {
 
   public routes() {
     this.router.post("/", this.store);
+    this.router.get("/", this.index);
+    this.router.put("/:id", this.update);
+    this.router.delete("/:id", this.delete);
     return this.router;
   }
 
@@ -51,6 +54,21 @@ class AlertController {
     });
 
     return res.status(201).json(alert);
+  }
+  private async index(req: Request, res: Response): Promise<any> {
+    const alerts = await AlertModel.find();
+
+    return res.status(200).json(alerts);
+  }
+  private async update(req: Request, res: Response): Promise<any> {
+    const { id } = req.params;
+    const result = await AlertModel.findByIdAndUpdate(id, { ...req.body });
+    return res.status(200).json(result);
+  }
+  private async delete(req: Request, res: Response): Promise<any> {
+    const { id } = req.params;
+    const result = await AlertModel.findByIdAndDelete(id);
+    return res.status(200).json(result);
   }
 }
 

@@ -9,8 +9,7 @@ const AlertSchema = new mongoose.Schema({
     default: Date.now
   },
   deleted_at: {
-    type: Date,
-    default: Date.now
+    type: Date
   }
 });
 
