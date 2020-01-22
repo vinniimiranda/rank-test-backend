@@ -6,7 +6,11 @@
   "scripts": {
     "build": "yarn tsc",
     "postbuild": "Xcopy /E /I src\\views .\\dist\\views",
-    "test": "yarn jest"
+    "test": "yarn jest",
+    "prestart": "yarn build",
+    "start": "npm-run-all -p start:*",
+    "start:server": "node dist/index",
+    "start:queue": "node dist/queue"
   },
   "dependencies": {
     "bull": "^3.12.1",
@@ -36,6 +40,7 @@
     "@types/mongoose": "^5.5.41",
     "@types/node": "^13.1.6",
     "@types/nodemailer": "^6.4.0",
-    "@types/supertest": "^2.0.8"
+    "@types/supertest": "^2.0.8",
+    "npm-run-all": "^4.1.5"
   }
 }
