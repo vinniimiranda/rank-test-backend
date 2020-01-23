@@ -1,24 +1,5 @@
 version: '3.7'
 services:
-  api:
-    image: nodejs:alpine
-    build:
-      context: .
-      dockerfile: Dockerfile
-    command: yarn dev
-    ports:
-      - '3333:3333'
-    env_file: ./.env
-    volumes:
-      - .:/usr/app/
-      - /usr/app/node_modules
-    depends_on:
-      - db_mongo
-    links:
-      - db_mongo
-      - redis
-    networks:
-      - redis-net
   db_mongo:
     image: mongo
     volumes:
@@ -29,15 +10,3 @@ services:
     image: redis:alpine
     ports:
       - '6379:6379'
-    command: ['redis-server', '--appendonly', 'yes']
-    hostname: redis
-    networks:
-      - redis-net
-    volumes:
-      - redis-data:/data
-
-networks:
-  redis-net:
-
-volumes:
-  redis-data:
