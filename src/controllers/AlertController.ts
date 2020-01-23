@@ -64,7 +64,7 @@ class AlertController {
 
   private async update(req: Request, res: Response): Promise<Response> {
     const { id } = req.params;
-    await AlertModel.findOneAndUpdate(id, { ...req.body });
+    await AlertModel.findByIdAndUpdate(id, { ...req.body });
 
     return res.status(204).json();
   }
