@@ -34,7 +34,7 @@ class AppServer {
 
   private database(): void {
     const uri = `mongodb://${process.env.MONGO_HOST}:${process.env.MONGO_PORT}/${process.env.MONGO_DATABASE}`;
-    mongoose.connect(uri, {
+    mongoose.connect(process.env.MONGO_URL || uri, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
       useFindAndModify: false

@@ -2,8 +2,13 @@ import request from "supertest";
 import faker from "faker";
 
 import AppServer from "../../server";
+import AlertModel from "./../../models/AlertModel";
 
 describe("Alert suite tests", () => {
+  beforeEach(async () => {
+    await AlertModel.deleteMany({});
+  });
+
   it("Shoud create an alert for a specific keyword", async () => {
     const payload = {
       keyword: faker.random.alphaNumeric(10),

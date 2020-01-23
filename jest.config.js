@@ -89,7 +89,7 @@ module.exports = {
   // preset: null,
 
   // Run tests from one or more projects
-  // projects: null,
+  preset: "@shelf/jest-mongodb",
 
   // Use this configuration option to add custom reporters to Jest
   // reporters: undefined,
