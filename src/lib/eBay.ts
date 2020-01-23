@@ -28,7 +28,7 @@ class EbayService {
     }
   }
 
-  public async findItemByKeywords({ keywords }): Promise<any> {
+  public async findItemByKeywords({ keywords = String }): Promise<any> {
     try {
       const data = await this.instance.findItemsByKeywords({
         keywords,
