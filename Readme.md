@@ -17,7 +17,7 @@ You must rename `.env.example` to `.env` and replace all the variables values.
 
 ## Docker
 
-This projet uses docker for the Database and Queue control, and it has two containers:
+This project uses docker for the Database and Queue control, and it has two containers:
 
 - db_mongo - MongoDB Instance
 - redis - Redis Instance
@@ -43,7 +43,7 @@ The API has the routes below:
 - `GET` /alerts - return all alerts
 - `POST` /alerts - create an alert
 - `PUT` /alerts/:id - update an alert by his id (\_id on Mongo)
-- `DELETE` /alerts/:id - delte and alert by his id
+- `DELETE` /alerts/:id - delete and alert by his id
 - `GET` /admin/queues - BullBoard Dashboard to wacth the queue in real-time
 
 ## Development (Enviroment)
