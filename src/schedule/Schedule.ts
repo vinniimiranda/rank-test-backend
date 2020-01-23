@@ -10,7 +10,6 @@ class Schedule {
   private async createAlertsJob(): Promise<void> {
     const bullOptions = {
       delay: 300,
-      removeOnComplete: true,
       attempts: 3,
       backoff: {
         type: 'exponential',
