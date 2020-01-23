@@ -22,7 +22,7 @@ This project uses docker for the Database and Queue control, and it has two cont
 - db_mongo - MongoDB Instance
 - redis - Redis Instance
 
-## Instalation
+## Installation
 
 - Clone this repository
 - Run `yarn` to install all the dependecies
