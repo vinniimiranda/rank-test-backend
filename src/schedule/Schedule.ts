@@ -1,33 +1,33 @@
-import AlertModel from "./../models/AlertModel";
-import EbayService from "./../lib/eBay";
-import { mailQueue } from "../lib/Queue";
+import AlertModel from '../models/AlertModel';
+import EbayService from '../lib/eBay';
+import { mailQueue } from '../lib/Queue';
 
 class Schedule {
   constructor() {
     this.createAlertsJob();
   }
 
-  private async createAlertsJob() {
+  private async createAlertsJob(): Promise<void> {
     const bullOptions = {
       delay: 300,
       removeOnComplete: true,
       attempts: 3,
       backoff: {
-        type: "exponential",
-        delay: 1000
-      }
+        type: 'exponential',
+        delay: 1000,
+      },
     };
 
     setInterval(async () => {
       const alerts = await AlertModel.find({
-        interval: 2
+        interval: 2,
       });
 
       for (const alert of alerts) {
-        const email = await alert.get("email");
-        const keyword = await alert.get("keyword");
+        const email = await alert.get('email');
+        const keyword = await alert.get('keyword');
         const result = await EbayService.findItemByKeywords({
-          keywords: keyword
+          keywords: keyword,
         });
 
         await mailQueue.add({ email, keyword, result }, { ...bullOptions });
@@ -36,13 +36,13 @@ class Schedule {
 
     setInterval(async () => {
       const alerts = await AlertModel.find({
-        interval: 10
+        interval: 10,
       });
       for (const alert of alerts) {
-        const email = await alert.get("email");
-        const keyword = await alert.get("keyword");
+        const email = await alert.get('email');
+        const keyword = await alert.get('keyword');
         const result = await EbayService.findItemByKeywords({
-          keywords: keyword
+          keywords: keyword,
         });
 
         await mailQueue.add({ email, keyword, result }, { ...bullOptions });
@@ -51,13 +51,13 @@ class Schedule {
 
     setInterval(async () => {
       const alerts = await AlertModel.find({
-        interval: 30
+        interval: 30,
       });
       for (const alert of alerts) {
-        const email = await alert.get("email");
-        const keyword = await alert.get("keyword");
+        const email = await alert.get('email');
+        const keyword = await alert.get('keyword');
         const result = await EbayService.findItemByKeywords({
-          keywords: keyword
+          keywords: keyword,
         });
 
         await mailQueue.add({ email, keyword, result }, { ...bullOptions });

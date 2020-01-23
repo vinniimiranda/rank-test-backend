@@ -10,7 +10,9 @@
     "prestart": "yarn build",
     "start": "npm-run-all -p start:*",
     "start:server": "node dist/index",
-    "start:queue": "node dist/queue"
+    "start:queue": "node dist/queue",
+    "dev": "nodemon src/index.ts",
+    "fix": "yarn eslint --fix --ext .ts src"
   },
   "dependencies": {
     "bull": "^3.12.1",
@@ -42,7 +44,19 @@
     "@types/node": "^13.1.6",
     "@types/nodemailer": "^6.4.0",
     "@types/supertest": "^2.0.8",
+    "@typescript-eslint/eslint-plugin": "^2.17.0",
+    "@typescript-eslint/parser": "^2.17.0",
     "add": "^2.0.6",
-    "npm-run-all": "^4.1.5"
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-config-prettier": "^6.9.0",
+    "eslint-import-resolver-typescript": "^2.0.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-prettier": "^3.1.2",
+    "nodemon": "^2.0.2",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^1.19.1",
+    "sucrase": "^3.12.1",
+    "tsconfig-paths": "^3.9.0"
   }
 }

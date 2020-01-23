@@ -1,11 +1,11 @@
-import express from "express";
-import cors from "cors";
-import mongoose from "mongoose";
-import BullBoard from "bull-board";
+import express from 'express';
+import cors from 'cors';
+import mongoose from 'mongoose';
+import BullBoard from 'bull-board';
 
-import routes from "./routes";
-import "./schedule/Schedule";
-import { mailQueue } from "./lib/Queue";
+import routes from './routes';
+import './schedule/Schedule';
+import { mailQueue } from './lib/Queue';
 
 class AppServer {
   server: express.Application;
@@ -18,18 +18,18 @@ class AppServer {
     this.bullBoard();
   }
 
-  private routes() {
+  private routes(): void {
     this.server.use(routes);
   }
 
-  private middlewares() {
+  private middlewares(): void {
     this.server.use(cors());
     this.server.use(express.json());
   }
 
-  private bullBoard() {
+  private bullBoard(): void {
     BullBoard.setQueues(mailQueue);
-    this.server.use("/admin/queues", BullBoard.UI);
+    this.server.use('/admin/queues', BullBoard.UI);
   }
 
   private database(): void {
@@ -37,7 +37,7 @@ class AppServer {
     mongoose.connect(process.env.MONGO_URL || uri, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
-      useFindAndModify: false
+      useFindAndModify: false,
     });
   }
 }

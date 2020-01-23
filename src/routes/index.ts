@@ -1,18 +1,19 @@
-import { Router, Request, Response } from "express";
+import { Router, Request, Response } from 'express';
 
-import AlertController from "../controllers/AlertController";
+import AlertController from '../controllers/AlertController';
 
 class Routing {
   router: Router;
+
   constructor() {
     this.router = Router();
-    this.router.get("/", (req: Request, res: Response) =>
+    this.router.get('/', (req: Request, res: Response) =>
       res.status(200).json({
-        root: "Api root routes !!!"
-      })
+        root: 'Api root routes !!!',
+      }),
     );
 
-    this.router.use("/alerts", AlertController.routes());
+    this.router.use('/alerts', AlertController.routes());
   }
 }
 

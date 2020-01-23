@@ -1,6 +1,6 @@
-import "dotenv/config";
+import 'dotenv/config';
 
-import AppServer from "./server";
+import AppServer from './server';
 
 const PORT = process.env.PORT || 3000;
 const server = AppServer;

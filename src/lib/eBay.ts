@@ -1,6 +1,5 @@
-// @ts-ignore
-import Ebay from "ebay-node-api";
-import "dotenv/config";
+import Ebay from 'ebay-node-api';
+import 'dotenv/config';
 
 class EbayService {
   public instance: any;
@@ -9,18 +8,19 @@ class EbayService {
     this.init();
     this.getAccessToken();
   }
+
   private async init() {
     this.instance = new Ebay({
       clientID: process.env.APP_ID,
       clientSecret: process.env.CLIENT_SECRET,
       body: {
-        grant_type: "client_credentials",
-        scope: "https://api.ebay.com/oauth/api_scope"
-      }
+        grant_type: 'client_credentials',
+        scope: 'https://api.ebay.com/oauth/api_scope',
+      },
     });
   }
 
-  private async getAccessToken() {
+  private async getAccessToken(): Promise<void> {
     try {
       await this.instance.getAccessToken();
     } catch (error) {
@@ -28,14 +28,14 @@ class EbayService {
     }
   }
 
-  public async findItemByKeywords({ keywords = "" }) {
+  public async findItemByKeywords({ keywords }): Promise<any> {
     try {
       const data = await this.instance.findItemsByKeywords({
         keywords,
-        sortOrder: "PricePlusShippingLowest",
+        sortOrder: 'PricePlusShippingLowest',
         pageNumber: 1,
         limit: 3,
-        entriesPerPage: 3
+        entriesPerPage: 3,
       });
 
       const results = data[0].searchResult[0].item.map(
@@ -43,8 +43,8 @@ class EbayService {
           sellingStatus: { currentPrice: { [x: string]: any }[] }[];
         }) => ({
           ...item,
-          price: item.sellingStatus[0].currentPrice[0]["__value__"]
-        })
+          price: item.sellingStatus[0].currentPrice[0].__value__,
+        }),
       );
       return results;
     } catch (error) {

@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
 const AlertSchema = new mongoose.Schema({
   keyword: String,
@@ -6,13 +6,13 @@ const AlertSchema = new mongoose.Schema({
   interval: Number,
   created_at: {
     type: Date,
-    default: Date.now
+    default: Date.now,
   },
   deleted_at: {
-    type: Date
-  }
+    type: Date,
+  },
 });
 
-const AlertModel = mongoose.model("Alert", AlertSchema);
+const AlertModel = mongoose.model('Alert', AlertSchema);
 
 export default AlertModel;
